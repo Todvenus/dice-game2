@@ -1,5 +1,5 @@
 // Toglogchinn eeljiig xadgalax xuwisagch
-var activePlayer = 1;
+var activePlayer = 0;
 
 //Toglogchiin onoog xadgalax xuwisagch
 var score = [0, 0];
@@ -23,9 +23,28 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     var diceNumber = Math.floor (Math.random()*6) + 1;
     diceDom.style.display = "block";
 diceDom.src = 'dice-' + diceNumber + '.png';
+
+if (diceNumber !==1) {
+    roundScore = roundScore + diceNumber;
+    document.getElementById("current-" + activePlayer).textContent = roundScore;
+    }
+
+    else{
+        roundScore = 0;
+    document.getElementById("current-" + activePlayer).textContent =0;
+
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0); 
+
+document.querySelector('.player-0-panel').classList.toggle('active');
+document.querySelector('.player-1-panel').classList.toggle('active');
+
+diceDom.style.display = "none";
+    }
 });
 
 
 
-console.log("shoo : " + diceNumber);
+
+
+
 
