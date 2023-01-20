@@ -2,7 +2,7 @@
 var activePlayer = 0;
 
 //Toglogchiin onoog xadgalax xuwisagch
-var score = [0, 0];
+var scores = [0, 0];
 
 //Eeljiin onoo xuwisagch
 var roundScore = 0;
@@ -30,7 +30,27 @@ if (diceNumber !==1) {
     }
 
     else{
-        roundScore = 0;
+       
+                    switchPlayer();
+    }
+});
+
+document.querySelector('.btn-hold').addEventListener("click", function(){
+
+    scores[activePlayer] = scores[activePlayer] + roundScore;
+
+    if (scores[activePlayer] >= 100) {
+        document.getElementById('name-'+ activePlayer).textContent = 'Winner';
+    }  
+
+document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+
+                    switchPlayer();
+
+});
+
+function switchPlayer () {
+    roundScore = 0;
     document.getElementById("current-" + activePlayer).textContent =0;
 
     activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0); 
@@ -39,9 +59,7 @@ document.querySelector('.player-0-panel').classList.toggle('active');
 document.querySelector('.player-1-panel').classList.toggle('active');
 
 diceDom.style.display = "none";
-    }
-});
-
+};
 
 
 
