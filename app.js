@@ -1,23 +1,40 @@
 // Toglogchinn eeljiig xadgalax xuwisagch
-var activePlayer = 0;
+var activePlayer;
 
 //Toglogchiin onoog xadgalax xuwisagch
-var scores = [0, 0];
+var scores;
 
 //Eeljiin onoo xuwisagch
-var roundScore = 0;
-// Shonii ali talaataa buusang xadgalax xuwisagch  
-var diceNumber = Math.floor (Math.random()*6) + 1;
+var roundScore;
 
+var diceDom = document.querySelector(".dice");
+initGame();
 
+function initGame(){
+    activePlayer = 0;
+    scores = [0,0];
+    roundScore = 0;
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 
 document.getElementById("current-0").textContent = '0';
 document.getElementById("current-1").textContent = '0';
 
-var diceDom = document.querySelector(".dice");
+document.querySelector(".player-0-panel").classList.remove()
+
 diceDom.style.display = "none";
+
+document.getElementById("name-0").textContent = "Player 1";
+document.getElementById("name-1").textContent = "Player 2";
+
+document.querySelector(".player-0-panel").classList.remove('winner')
+document.querySelector(".player-1-panel").classList.remove('winner')
+
+document.querySelector(".player-0-panel").classList.add('active')
+};
+// Shonii ali talaataa buusang xadgalax xuwisagch  
+var diceNumber = Math.floor (Math.random()*6) + 1;
+
 
 document.querySelector('.btn-roll').addEventListener('click', function(){
     var diceNumber = Math.floor (Math.random()*6) + 1;
@@ -38,12 +55,16 @@ if (diceNumber !==1) {
 document.querySelector('.btn-hold').addEventListener("click", function(){
 
     scores[activePlayer] = scores[activePlayer] + roundScore;
+    
+document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= 10) {
         document.getElementById('name-'+ activePlayer).textContent = 'Winner';
     }  
+    else {
+        
+    }
 
-document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
                     switchPlayer();
 
@@ -60,6 +81,10 @@ document.querySelector('.player-1-panel').classList.toggle('active');
 
 diceDom.style.display = "none";
 };
+
+document.querySelector('.btn-new').addEventListener( 'click', initGame);
+
+
 
 
 
